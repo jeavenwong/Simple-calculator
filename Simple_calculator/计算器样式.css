@@ -1,0 +1,26 @@
+.block{
+    background-color:chartreuse;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font:  14px Arial,sans-serif;
+    width:429px;
+    margin-left:275px;
+    background-image:url("http://img4.imgtn.bdimg.com/it/u=3399785621,2409977199&fm=200&gp=0.jpg");
+}
+.buttons{
+    width: 82px;
+    height: 46px;
+    text-align:center;
+    background-color:lightgray;
+    margin: 10px 10px 10px 10px;
+    color:none;
+
+}
+#result{
+    width:416px;
+    height:36px;
+}
+#an_jian{
+    margin-left:275px;
+}

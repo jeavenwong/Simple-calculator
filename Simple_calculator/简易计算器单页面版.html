@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf-8">
+<!--<link rel = "stylesheet" type = "text/css" href = "./计算器样式.css">-->
+</head>
+<style type = "text/css">
+	.block2{
+       background-color:chartreuse;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font:  14px Arial,sans-serif;
+    width:429px;
+    margin-left:275px;
+    background-image:url("http://img1.imgtn.bdimg.com/it/u=2168021676,2416409195&fm=200&gp=0.jpg");
+}
+.buttons{
+    width: 82px;
+    height: 46px;
+    text-align:center;
+    background-color:lightgray;
+    margin: 10px 10px 10px 10px;
+    color:none;
+
+}
+#result{
+    width:416px;
+    height:36px;
+}
+#an_jian{
+    margin-left:275px;
+}
+
+</style>
+<body>
+    <input type = "button" id = "an_jian" onclick = "change_color();" value = "点击可以改变成你喜欢的颜色颜色">
+    <!--  <button id = "an_jian" onclick = "change_color();">点击可以改变成你喜欢的颜色</button> -->
+	<div class = "block2">
+        <h2 id = "biao_ti">简易计算器 copyright@2017Jeavenwong</h2>
+        <h2 id = "date">Finished Date:2017.8.2</h2>
+        <table border = "1" cellspacing = "0">
+            <tr>
+                <th colspan="4"><input type = "text" value = "&nbsp" id = "result"></th>
+            </tr>
+            <tr>
+                <td><input type = "button" id = "AC" value = "AC" onclick = "del_all_num();" class = "buttons"></td>
+                <td><input type = "button" id = "DEL" value = "DEL" onclick = "del_num();" class = "buttons"></td>
+                <td><input type = "button" id = "/" value = "/" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "*" value = "*" onclick = "display(this.id);" class = "buttons"></td>
+            </tr>
+            <tr>
+                <td><input type = "button" id = "7" value = "7" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "8" value = "8" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "9" value = "9" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "-" value = "-" onclick = "display(this.id);" class = "buttons"></td>
+            </tr>
+            <tr>
+                <td><input type = "button" id = "4" value = "4" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "5" value = "5" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "6" value = "6" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "+" value = "+" onclick = "display(this.id);" class = "buttons"></td>
+            </tr>
+            <tr>
+               <td><input type = "button" id = "1" value = "1" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "2" value = "2" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "3" value = "3" onclick = "display(this.id);" class = "buttons"></td>
+                <th rowspan="2"><input type = "button" id = "=" value = "=" onclick = "calc();" class = "buttons"></th>
+            </tr>
+            <tr>
+                <td><input type = "button" id = "%" value = "%" class = "buttons" onclick = "bai_fen_hao();"></td>
+                <td><input type = "button" id = "0" value = "0" onclick = "display(this.id);" class = "buttons"></td>
+                <td><input type = "button" id = "." value = "." class = "buttons" onclick = "display(this.id);"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+
+        var num_lib = ["0","1","2","3","4","5","6","7","8","9"];
+        var char_lib = ["+","-","*","/","%",".","AC","DEL","&nbsp",""];
+        var calc_lib = ["+","-","*","/","."];
+
+        //判断元素是否在哎数组中
+        function contain(arr,obj){
+            for(var i = 0 ; i < arr.length ; i++){
+                if(arr[i] === obj){
+                  return true;
+                }
+            }
+            return false;
+        }
+        
+        //计算器的输出框显示
+        function display(num){
+            if(  (document.getElementById("result").value == "&nbsp" || document.getElementById("result").value == "0" ) && !(contain(char_lib,num))  ){ 
+                document.getElementById("result").value = num;
+            }
+            else if(contain(num_lib,num)){
+                document.getElementById("result").value += num;
+            }
+            else if( contain(calc_lib,num) && !(contain(char_lib,document.getElementById("result").value)) ){
+                document.getElementById("result").value = document.getElementById("result").value + num;
+            }
+        }
+        
+        //清空功能
+        function del_all_num(){
+            document.getElementById("result").value = "";
+        }
+
+        //调用js内置函数来计算最终结果
+        function calc(){
+            document.getElementById("result").value = eval(document.getElementById("result").value);
+        }
+
+        //字符退格清除
+        function del_num(){
+            document.getElementById("result").value = document.getElementById("result").value.substring(0,document.getElementById("result").value.length - 1);
+        }
+
+        //对百分号"%"的实现
+        function bai_fen_hao(){
+            document.getElementById("result").value = eval( document.getElementById("result").value + "/" + "100" ); 
+        }
+
+        var color_lib = ["blue","Crimson","DarkBlue","DarkGoldenRod","DimGray","LimeGreen"];
+        var elem_id = ["+","-","*","/","%",".","0","1","2","3","4","5","6","7","8","9","AC","DEL","biao_ti","an_jian","date"];
+        var i = 0;
+        function change_color(){
+            for (var temp in elem_id){
+                document.getElementById(elem_id[temp]).style.color = color_lib[i];
+            }
+            i++;
+            if(i > 5){
+                i = 0;
+            }
+        }
+
+    </script>
+    <noscript>
+        <p>不好意思，你的浏览器不支持javascript脚本~~~</p>
+    </noscript>
+    <br/>
+</body>
+</html>
+<textarea id = "text" rows = "100" cols = "100" style="width:200px; height:100px">
+注意！！！
+此计算器存在一些BUG：
+Example:在显示框已经输入类似于"333+"的字符后再重复输入运算符进行结果输出时，如果不存在此运算，将会发生错误！
+所以使用时请小心谨慎，请按照正确的规则使用！
+</textarea>
